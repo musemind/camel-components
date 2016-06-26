@@ -1,0 +1,53 @@
+{
+  "name": "camel-components",
+  "version": "0.0.4",
+  "description": "Camel Components",
+  "main": "./delivery/index.js",
+  "scripts": {
+    "build": "NODE_ENV=production webpack -p --config webpack.production.config.js --progress --profile --colors",
+    "dev": "webpack-dev-server --progress --profile --colors --hot",
+    "deliver": "babel ./camelComponents/fakeTyping.jsx --out-file ./delivery/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/musemind/camel-components.git"
+  },
+  "keywords": [
+    "React",
+    "Component",
+    "UI",
+    "Fake Typing"
+  ],
+  "author": "Johannes Linowski <kontakt@johanneslinowski.de>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/musemind/camel-components/issues"
+  },
+  "dependencies": {
+    "react": "15.0.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.10.1",
+    "babel-core": "6.7.7",
+    "babel-loader": "6.2.4",
+    "babel-preset-es2015": "6.6.0",
+    "babel-preset-react": "6.5.0",
+    "bootstrap": "3.3.5",
+    "browserify-global-shim": "^1.0.3",
+    "css-loader": "0.23.1",
+    "file-loader": "0.8.5",
+    "json-loader": "^0.5.4",
+    "json5-loader": "^0.6.0",
+    "jsx-loader": "^0.13.2",
+    "less": "^2.7.1",
+    "less-loader": "^2.2.3",
+    "node-libs-browser": "1.0.0",
+    "react-dom": "15.0.1",
+    "react-hot-loader": "1.3.0",
+    "style-loader": "0.13.1",
+    "react-codemirror": "^0.2.6",
+    "url-loader": "0.5.7",
+    "webpack": "1.13.0",
+    "webpack-dev-server": "1.14.1"
+  }
+}
