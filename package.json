@@ -24,7 +24,6 @@
     "url": "https://github.com/musemind/camel-components/issues"
   },
   "dependencies": {
-    "ramda": "^0.21.0",
     "react": "15.0.1"
   },
   "devDependencies": {

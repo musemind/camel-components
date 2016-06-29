@@ -1,5 +1,4 @@
 import React from 'react'
-import R from 'ramda'
 
 class AnimationWindow extends React.Component {
   componentWillMount() {
