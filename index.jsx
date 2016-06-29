@@ -35,29 +35,29 @@ ReactDOM.render(
       {name: 'social login', frames: 10, elements: [ // 0-9
         {style: {top: '35%', left: '20%', height: '30%', width: '60%', background: 'rgba(255, 255, 255, 0.5)', border: '#bbb 1px solid'}, content: null},
         {style: {top: '40%', left: '10%', height: '10%', width: '80%', fontSize: 17}, content: 'social login'},
-        {style: {top: '19%', left: '44%', height: '12%', width: '12%', backgroundImage: 'url(/avatar/boy-1.svg)'}, content: null},
-        {style: {top: '51%', left: '46%', height: '8%', width: '8%', backgroundImage: 'url(/socialnetwork/facebook.svg)'}, content: null},
-        {style: {top: '51%', left: '36%', height: '8%', width: '8%', backgroundImage: 'url(/socialnetwork/google-plus.svg)'}, content: null},
-        {style: {top: '51%', left: '56%', height: '8%', width: '8%', backgroundImage: 'url(/socialnetwork/twitter.svg)'}, content: null},
+        {style: {top: '19%', left: '44%', height: '12%', width: '12%', backgroundImage: 'url(./avatar/boy-1.svg)'}, content: null},
+        {style: {top: '51%', left: '46%', height: '8%', width: '8%', backgroundImage: 'url(./socialnetwork/facebook.svg)'}, content: null},
+        {style: {top: '51%', left: '36%', height: '8%', width: '8%', backgroundImage: 'url(./socialnetwork/google-plus.svg)'}, content: null},
+        {style: {top: '51%', left: '56%', height: '8%', width: '8%', backgroundImage: 'url(./socialnetwork/twitter.svg)'}, content: null},
       ]},
       {name: 'animation: facebook trigger', frames: 4, elements: [ // 10-13
         true,
         true,
         true,
-        {style: {top: '47%', left: '42%', height: '16%', width: '16%', backgroundImage: 'url(/socialnetwork/facebook.svg)', transition: 'all 400ms cubic-bezier(0.250, 1.085, 0.785, 1.650)', zIndex: '20'}, content: null},
+        {style: {top: '47%', left: '42%', height: '16%', width: '16%', backgroundImage: 'url(./socialnetwork/facebook.svg)', transition: 'all 400ms cubic-bezier(0.250, 1.085, 0.785, 1.650)', zIndex: '20'}, content: null},
         true,
         true,
       ]},
       {name: 'logged in', frames: 12, elements: [ // 14-25
         {style: {top: '10%', left: '10%', height: '10%', width: '80%', background: 'rgba(255, 255, 255, 0.5)', border: '#bbb 1px solid'}, content: null},
         {style: {top: '40%', left: '10%', height: '10%', width: '80%', fontSize: 17, opacity: '0'}, content: 'social login'}, //fade out
-        {style: {top: '12%', left: '78%', height: '5%', width: '5%', backgroundImage: 'url(/avatar/boy-1.svg)'}, content: null},
-        {style: {top: '12%', left: '84%', height: '5%', width: '5%', backgroundImage: 'url(/socialnetwork/facebook.svg)', zIndex: '20'}, content: null},
-        {style: {top: '49%', left: '16%', height: '12%', width: '12%', backgroundImage: 'url(/socialnetwork/google-plus.svg)', opacity: '0'}, content: null}, //fade out
-        {style: {top: '49%', left: '76%', height: '12%', width: '12%', backgroundImage: 'url(/socialnetwork/twitter.svg)', opacity: '0', zIndex: '18'}, content: null}, //fade out
-        {style: {top: '79%', left: '16%', height: '12%', width: '12%', backgroundImage: 'url(/avatar/boy-18.svg)', opacity: '0', zIndex: '18'}, content: null}, // invisible add user
-        {style: {top: '79%', left: '46%', height: '12%', width: '12%', backgroundImage: 'url(/avatar/girl-3.svg)', opacity: '0', zIndex: '18'}, content: null}, // invisible add user
-        {style: {top: '79%', left: '76%', height: '12%', width: '12%', backgroundImage: 'url(/avatar/boy-12.svg)', opacity: '0', zIndex: '18'}, content: null}, // invisible add user
+        {style: {top: '12%', left: '78%', height: '5%', width: '5%', backgroundImage: 'url(./avatar/boy-1.svg)'}, content: null},
+        {style: {top: '12%', left: '84%', height: '5%', width: '5%', backgroundImage: 'url(./socialnetwork/facebook.svg)', zIndex: '20'}, content: null},
+        {style: {top: '49%', left: '16%', height: '12%', width: '12%', backgroundImage: 'url(./socialnetwork/google-plus.svg)', opacity: '0'}, content: null}, //fade out
+        {style: {top: '49%', left: '76%', height: '12%', width: '12%', backgroundImage: 'url(./socialnetwork/twitter.svg)', opacity: '0', zIndex: '18'}, content: null}, //fade out
+        {style: {top: '79%', left: '16%', height: '12%', width: '12%', backgroundImage: 'url(./avatar/boy-18.svg)', opacity: '0', zIndex: '18'}, content: null}, // invisible add user
+        {style: {top: '79%', left: '46%', height: '12%', width: '12%', backgroundImage: 'url(./avatar/girl-3.svg)', opacity: '0', zIndex: '18'}, content: null}, // invisible add user
+        {style: {top: '79%', left: '76%', height: '12%', width: '12%', backgroundImage: 'url(./avatar/boy-12.svg)', opacity: '0', zIndex: '18'}, content: null}, // invisible add user
         {style: {top: '40%', left: '10%', height: '10%', width: '80%', fontSize: 17, opacity: '0'}, content: 'realtime collaboration'}, // invisible new text
       ]},
       {name: 'show users', frames: 12, elements: [ // 26-37
@@ -67,19 +67,19 @@ ReactDOM.render(
         true,
         false,
         false,
-        {style: {top: '60%', left: '27%', height: '10%', width: '10%', backgroundImage: 'url(/avatar/boy-18.svg)', opacity: '1', zIndex: '18'}, content: null}, // invisible add user
-        {style: {top: '60%', left: '47%', height: '10%', width: '10%', backgroundImage: 'url(/avatar/girl-3.svg)', opacity: '1', zIndex: '18'}, content: null}, // invisible add user
-        {style: {top: '60%', left: '67%', height: '10%', width: '10%', backgroundImage: 'url(/avatar/boy-12.svg)', opacity: '1', zIndex: '18'}, content: null}, // invisible add user,
+        {style: {top: '60%', left: '27%', height: '10%', width: '10%', backgroundImage: 'url(./avatar/boy-18.svg)', opacity: '1', zIndex: '18'}, content: null}, // invisible add user
+        {style: {top: '60%', left: '47%', height: '10%', width: '10%', backgroundImage: 'url(./avatar/girl-3.svg)', opacity: '1', zIndex: '18'}, content: null}, // invisible add user
+        {style: {top: '60%', left: '67%', height: '10%', width: '10%', backgroundImage: 'url(./avatar/boy-12.svg)', opacity: '1', zIndex: '18'}, content: null}, // invisible add user,
         {style: {top: '40%', left: '10%', height: '10%', width: '80%', fontSize: 17, opacity: '1'}, content: 'realtime collaboration'}, // fade in
       ]},
       {name: 'speech bubbling', frames: 3, elements: [ // 38-39
         true, false, true, true,
-        {style: {top: '50%', left: '61%', height: '10%', width: '10%', backgroundImage: 'url(/communication/speech-bubble.svg)', opacity: '1'}, content: null}, // invisible add user
+        {style: {top: '50%', left: '61%', height: '10%', width: '10%', backgroundImage: 'url(./communication/speech-bubble.svg)', opacity: '1'}, content: null}, // invisible add user
         false, true, true, true, true
       ]},
       {name: 'speech bubbling2', frames: 3, elements: [ // 40-41
         true, false, true, true, true,
-        {style: {top: '50%', left: '35%', height: '10%', width: '10%', backgroundImage: 'url(/communication/speech-bubble.svg)', transform: 'scaleX(-1)', opacity: '1'}, content: null}, // invisible add user
+        {style: {top: '50%', left: '35%', height: '10%', width: '10%', backgroundImage: 'url(./communication/speech-bubble.svg)', transform: 'scaleX(-1)', opacity: '1'}, content: null}, // invisible add user
         true, true, true, true
       ]},
     ]}
