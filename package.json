@@ -1,12 +1,12 @@
 {
   "name": "camel-components",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Camel Components",
   "main": "./delivery/index.js",
   "scripts": {
     "build": "NODE_ENV=production webpack -p --config webpack.production.config.js --progress --profile --colors",
     "dev": "webpack-dev-server --progress --profile --colors --hot",
-    "deliver": "babel ./camelComponents/fakeTyping.jsx --out-file ./delivery/index.js"
+    "deliver": "babel ./camelComponents/* --out-file ./delivery/index.js"
   },
   "repository": {
     "type": "git",
