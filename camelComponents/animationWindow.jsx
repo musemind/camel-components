@@ -2,10 +2,13 @@ import React from 'react'
 
 class AnimationWindow extends React.Component {
   componentWillMount() {
-    const {frameSpeed, frameStart, animation, scenes} = this.props
+    let {frameSpeed, frameStart, animation, scenes} = this.props
 
     let framesTotal = 0
     scenes.forEach((scene) => {
+      if (typeof frameStart === 'string' && frameStart === scene.name) {
+        frameStart = framesTotal
+      }
       framesTotal += scene.frames
     })
 
