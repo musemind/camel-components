@@ -31,6 +31,7 @@ ReactDOM.render(
     animation={true} // false to freeze frame for easy scene creation
     transitionSpeed={800} // default transition speed, overwritten by element styles
     windowStyles={{position: 'relative', height: 400, width: 400, background: 'rgba(0.0.0.0)'}}
+    stopOnEnd={false} // optional: false (default) => endless set repetition, true => set will run once
     scenes={[
       {name: 'social login', frames: 10, elements: [ // 0-9
         {style: {top: '35%', left: '20%', height: '30%', width: '60%', background: 'rgba(255, 255, 255, 0.5)', border: '#bbb 1px solid'}, content: null},
