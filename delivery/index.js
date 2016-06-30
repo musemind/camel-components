@@ -15,6 +15,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _ramda = require('ramda');
+
+var _ramda2 = _interopRequireDefault(_ramda);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -36,22 +40,41 @@ var AnimationWindow = function (_React$Component) {
     key: 'componentWillMount',
     value: function componentWillMount() {
       var _props = this.props;
-      var frameSpeed = _props.frameSpeed;
       var frameStart = _props.frameStart;
-      var animation = _props.animation;
       var scenes = _props.scenes;
+      var transitionSpeed = _props.transitionSpeed;
 
 
       var framesTotal = 0;
+      var elementIds = {};
       scenes.forEach(function (scene) {
+        if (typeof frameStart === 'string' && frameStart === scene.name) {
+          frameStart = framesTotal;
+        }
+        Object.keys(scene.elements).forEach(function (key) {
+          elementIds[key] = true;
+        });
         framesTotal += scene.frames;
       });
+      elementIds = Object.keys(elementIds);
 
-      console.log('frames total', framesTotal);
+      var defaultStyles = {
+        position: 'absolute',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundPosition: 'center center',
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
+        opacity: 1,
+        transition: 'left ' + transitionSpeed + 'ms ease,top ' + transitionSpeed + 'ms ease, height ' + transitionSpeed + 'ms ease, width ' + transitionSpeed + 'ms ease, border ' + transitionSpeed + 'ms ease, border-color ' + transitionSpeed + 'ms ease, background-color ' + transitionSpeed + 'ms ease, background-position ' + transitionSpeed + 'ms ease, opacity ' + transitionSpeed + 'ms ease'
+      };
 
       this.setState({
         frame: frameStart,
-        framesTotal: framesTotal
+        framesTotal: framesTotal,
+        defaultStyles: defaultStyles,
+        elementIds: elementIds
       });
     }
   }, {
@@ -60,39 +83,46 @@ var AnimationWindow = function (_React$Component) {
       var _this2 = this;
 
       if (this.props.animation) {
-        setInterval(function () {
-          _this2.nextFrame();
-        }, 200);
+        this.setState({
+          timer: setInterval(function () {
+            _this2.nextFrame();
+          }, 200)
+        });
       }
     }
   }, {
     key: 'shouldComponentUpdate',
-    value: function shouldComponentUpdate(nextProps, nextState) {
+    value: function shouldComponentUpdate(nextState) {
       if (this.state.frame === nextState.frame) return false;
       return true;
     }
   }, {
     key: 'nextFrame',
     value: function nextFrame() {
+      var stopOnEnd = this.props.stopOnEnd;
       var _state = this.state;
       var frame = _state.frame;
       var framesTotal = _state.framesTotal;
+      var timer = _state.timer;
 
-      this.setState({
-        frame: frame < framesTotal ? frame + 1 : 0
-      });
-      console.log(frame);
+      var newFrame = frame < framesTotal - 1 ? frame + 1 : 0;
+      if (stopOnEnd && newFrame === 0) {
+        clearInterval(timer);
+      } else {
+        this.setState({
+          frame: newFrame
+        });
+      }
     }
   }, {
     key: 'render',
     value: function render() {
-      var frame = this.state.frame;
+      var _state2 = this.state;
+      var frame = _state2.frame;
+      var defaultStyles = _state2.defaultStyles;
+      var elementIds = _state2.elementIds;
       var _props2 = this.props;
-      var frameSpeed = _props2.frameSpeed;
-      var frameStart = _props2.frameStart;
-      var animation = _props2.animation;
       var scenes = _props2.scenes;
-      var transitionSpeed = _props2.transitionSpeed;
       var windowStyles = _props2.windowStyles;
 
 
@@ -108,47 +138,49 @@ var AnimationWindow = function (_React$Component) {
 
       var currentScene = getCurrentScene(frame, scenes);
 
-      var animationElement = function animationElement(element, index) {
-        var defaultStyles = {
-          position: 'absolute',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundPosition: 'center center',
-          backgroundSize: 'contain',
-          backgroundRepeat: 'no-repeat',
-          opacity: 1,
-          transition: 'left ' + transitionSpeed + 'ms ease,top ' + transitionSpeed + 'ms ease, height ' + transitionSpeed + 'ms ease, width ' + transitionSpeed + 'ms ease, border ' + transitionSpeed + 'ms ease, border-color ' + transitionSpeed + 'ms ease, background-color ' + transitionSpeed + 'ms ease, background-position ' + transitionSpeed + 'ms ease, opacity ' + transitionSpeed + 'ms ease'
-        };
-        return _react2.default.createElement(
-          'div',
-          { key: index, style: _extends({}, defaultStyles, element.style) },
-          element.content
-        );
+      var animationElement = function animationElement(element, elementId) {
+        if (element) {
+          var content = element.content;
+
+          return _react2.default.createElement(
+            'div',
+            { key: elementId, style: _extends({}, defaultStyles, element.style) },
+            content ? content : null
+          );
+        }
       };
 
-      var sameElementOfPreviousScene = function sameElementOfPreviousScene(scenes, currentScene, elementIndex) {
-        var element = false;
+      var aggregateElement = function aggregateElement(scenes, currentScene, elementId) {
+        var style = {};
+        var searchScene = currentScene;
         do {
-          currentScene--;
-          element = scenes[currentScene].elements[elementIndex];
+          var element = _ramda2.default.clone(scenes[searchScene].elements[elementId]);
+          if (typeof element === 'undefined') element = true;
           if ((typeof element === 'undefined' ? 'undefined' : _typeof(element)) === 'object') {
-            return element;
+            if (element.removeAfterScene && searchScene !== currentScene) {
+              return false;
+            }
+            if (element.style.transition === 'default') {
+              element.style.transition = defaultStyles.transition;
+            }
+            style = _extends({}, element.style, style);
+            if (!element.styleUpdate) {
+              element.style = style;
+              return element;
+            }
+          } else {
+            if (!element) {
+              return false;
+            }
           }
-        } while (currentScene >= 0);
+          searchScene--;
+        } while (searchScene >= 0);
         return false;
       };
 
       var animationElements = function animationElements() {
-        return scenes[currentScene].elements.map(function (element, index) {
-          if ((typeof element === 'undefined' ? 'undefined' : _typeof(element)) === 'object') {
-            return animationElement(element, index);
-          } else {
-            if (element) {
-              return animationElement(sameElementOfPreviousScene(scenes, currentScene, index), index);
-            }
-            return false;
-          }
+        return elementIds.map(function (elementId) {
+          return animationElement(aggregateElement(scenes, currentScene, elementId), elementId);
         });
       };
 

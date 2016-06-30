@@ -1,6 +1,6 @@
 {
   "name": "camel-components",
-  "version": "0.0.7",
+  "version": "0.0.9",
   "description": "Camel Components",
   "main": "./delivery/index.js",
   "scripts": {
@@ -15,6 +15,8 @@
   "keywords": [
     "React",
     "Component",
+    "Animation",
+    "Scenes",
     "UI",
     "Fake Typing"
   ],
