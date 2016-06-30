@@ -27,9 +27,9 @@ ReactDOM.render(
 ReactDOM.render(
   <AnimationWindow
     frameSpeed={45} // in ms
-    frameStart={0}
-    animation={true}
-    transitionSpeed={800}
+    frameStart={'social login'} // scene name or frame number
+    animation={true} // false to freeze frame for easy scene creation
+    transitionSpeed={800} // default transition speed, overwritten by element styles
     windowStyles={{position: 'relative', height: 400, width: 400, background: 'rgba(0.0.0.0)'}}
     scenes={[
       {name: 'social login', frames: 10, elements: [ // 0-9
