@@ -6,12 +6,15 @@ class AnimationWindow extends React.Component {
     let {frameStart, scenes, transitionSpeed} = this.props
 
     let framesTotal = 0
+    let elementIds = {}
     scenes.forEach((scene) => {
       if (typeof frameStart === 'string' && frameStart === scene.name) {
         frameStart = framesTotal
       }
+      Object.keys(scene.elements).forEach((key) => {elementIds[key] = true})
       framesTotal += scene.frames
     })
+    elementIds = Object.keys(elementIds)
 
     const defaultStyles = {
       position: 'absolute',
@@ -28,7 +31,8 @@ class AnimationWindow extends React.Component {
     this.setState({
       frame: frameStart,
       framesTotal,
-      defaultStyles
+      defaultStyles,
+      elementIds
     })
   }
 
@@ -60,7 +64,7 @@ class AnimationWindow extends React.Component {
   }
 
   render () {
-    const {frame, defaultStyles} = this.state
+    const {frame, defaultStyles, elementIds} = this.state
     const {scenes, windowStyles} = this.props
 
     const getCurrentScene = (frame, scenes) => {
@@ -75,17 +79,25 @@ class AnimationWindow extends React.Component {
 
     const currentScene = getCurrentScene(frame, scenes)
 
-    const animationElement = (element, index) => {
-      return (
-        <div key={index} style={{...defaultStyles, ...element.style}}>{element.content}</div>
-      )
+    const animationElement = (element, elementId) => {
+      if (element) {
+        const {content} = element
+        return (
+          <div key={elementId} style={{...defaultStyles, ...element.style}}>{content ? content : null}</div>
+        )
+      }
     }
 
-    const aggregateElement = (scenes, currentScene, elementIndex) => {
+    const aggregateElement = (scenes, currentScene, elementId) => {
       let style = {}
+      let searchScene = currentScene
       do {
-        let element = R.clone(scenes[currentScene].elements[elementIndex])
+        let element = R.clone(scenes[searchScene].elements[elementId])
+        if (typeof element === 'undefined') element = true
         if (typeof element === 'object') {
+          if (element.removeAfterScene && searchScene !== currentScene) {
+            return false
+          }
           if (element.style.transition === 'default') {
             element.style.transition = defaultStyles.transition
           }
@@ -99,14 +111,14 @@ class AnimationWindow extends React.Component {
             return false
           }
         }
-        currentScene--
-      } while (currentScene >= 0)
+        searchScene--
+      } while (searchScene >= 0)
       return false
     }
 
     const animationElements = () => {
-      return scenes[currentScene].elements.map((element, index) => {
-        return animationElement(aggregateElement(scenes, currentScene, index), index)
+      return elementIds.map((elementId) => {
+        return animationElement(aggregateElement(scenes, currentScene, elementId), elementId)
       })
     }
 

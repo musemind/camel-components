@@ -1,8 +1,13 @@
 @mainColor: #f4b041;
 
+@blue: #1d75b3;
+@orange: #b35e14;
+@green: #047d65;
+
 body {
     font-family: 'Open Sans', sans-serif;
-    background: #fff;
+    background: @blue;
+    color: #eee;
     display: flex;
     flex-direction: column;
     margin: 0;
@@ -13,34 +18,35 @@ body {
         margin: 0 auto;
     }
     .sectionHeader {
-        text-align: center;
-        background: #333;
+        background: #fff;
         color: #fff;
         padding-bottom: 40px;
+        display: block;
+        padding: 30px 20px;
         h1 {
             font-family: 'Indie Flower', cursive;
             font-size: 60px;
             margin-bottom: 0px;
-            color: @mainColor;
+            color: @blue;
+            margin-top: 0px;
+            line-height: 34px;
         }
         p {
-            font-weight: 300;
+            font-weight: 100;
             margin-top: 10px;
         }
         a, a:hover, a:visited {
-            color: @mainColor;
-            margin: 10px 10px 0;
+            color: @green;
             display: inline-block;
             text-decoration: none;
+            margin-right: 30px;
         }
         .installation {
             span {
                 font-family: monospace;
                 font-weight: 100;
-                background: #aaa;
-                padding: 5px 40px;
                 display: inline-block;
-                color: #000;
+                color: @orange;
                 border-radius: 5px;
                 margin: 10px 0;
                 font-size: 16px;
@@ -58,7 +64,7 @@ h2 {
 }
 p {
     font-size: 15px;
-    font-weight: 400;
+    font-weight: 100;
 }
 
 .sectionCode {
@@ -111,16 +117,30 @@ p {
     font-size: 30px;
 }
 
-.CodeMirror {
-    height: 350px !important;
+
+.ReactCodeMirror {
+    border-top: 2px solid @blue;
+    border-bottom: 2px solid @blue;
+}
+.CodeMirror-vscrollbar {
+    display: none;
+}
+.fakeTypingCode .CodeMirror {
+    height: 380px !important;
+}
+.animationWindowCode .CodeMirror {
+    height: 1080px !important;
 }
 
 .sectionFooter {
     padding: 20px 0;
-    color: #777;
+    color: #fff;
     font-weight: 300;
+    background: @blue;
+    padding-left: 40px;
+
     a, a:hover, a:visited {
-        color: #444;
+        color: #bbb;
         text-decoration: none;
         font-weight: 400;
     }

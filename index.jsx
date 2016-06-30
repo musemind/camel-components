@@ -1,6 +1,6 @@
 require('./demo-assets/style.less')
 require('./demo-assets/codemirror.css')
-require('./demo-assets/codemirror-ambiance.css')
+require('./demo-assets/codemirror-neo.css')
 require('./node_modules/codemirror/mode/jsx/jsx');
 
 import ReactDOM from 'react-dom';
@@ -11,82 +11,6 @@ import Codemirror from 'react-codemirror'
 import { FakeTyping } from './camelComponents/fakeTyping.jsx'
 import { AnimationWindow } from './camelComponents/animationWindow.jsx'
 
-ReactDOM.render(
-  <FakeTyping
-    timeAfterCharacter={50}
-    timeAfterWord={4000}
-    lines={[
-    'Lorem Ipsum is simply dummy text..',
-    'Sed ut perspiciatis unde omnis iste natus.',
-    '1914 translation by H. Rackham'
-  ]}
-  />,
-  document.querySelector("#fakeTyping")
-)
-
-ReactDOM.render(
-  <AnimationWindow
-    frameSpeed={45} // in ms
-    frameStart={'social login'} // scene name or frame number
-    animation={true} // false to freeze frame for easy scene creation
-    transitionSpeed={800} // default transition speed, overwritten by element styles
-    windowStyles={{position: 'relative', height: 400, width: 400, background: 'rgba(0.0.0.0)'}}
-    stopOnEnd={false} // optional: false (default) => endless set repetition, true => set will run once
-    scenes={[
-      {name: 'social login', frames: 10, elements: [ // 0-9
-        {style: {top: '35%', left: '20%', height: '30%', width: '60%', background: 'rgba(255, 255, 255, 0.5)', border: '#bbb 1px solid'}, content: null},
-        {style: {top: '40%', left: '10%', height: '10%', width: '80%', fontSize: 17}, content: 'social login'},
-        {style: {top: '19%', left: '44%', height: '12%', width: '12%', backgroundImage: 'url(./avatar/boy-1.svg)'}, content: null},
-        {style: {top: '51%', left: '46%', height: '8%', width: '8%', backgroundImage: 'url(./socialnetwork/facebook.svg)', zIndex: '20'}, content: null},
-        {style: {top: '51%', left: '36%', height: '8%', width: '8%', backgroundImage: 'url(./socialnetwork/google-plus.svg)'}, content: null},
-        {style: {top: '51%', left: '56%', height: '8%', width: '8%', backgroundImage: 'url(./socialnetwork/twitter.svg)'}, content: null},
-      ]},
-      {name: 'animation: facebook trigger', frames: 4, elements: [ // 10-13
-        true,
-        true,
-        true,
-        {styleUpdate: true, style: {top: '47%', left: '42%', height: '16%', width: '16%', transition: 'all 400ms cubic-bezier(0.250, 1.085, 0.785, 1.650)'}, content: null},
-        true,
-        true,
-      ]},
-      {name: 'logged in', frames: 12, elements: [ // 14-25
-        {styleUpdate: true, style: {top: '10%', left: '10%', height: '10%', width: '80%'}, content: null},
-        {styleUpdate: true, style: {opacity: '0'}}, //fade out
-        {styleUpdate: true, style: {top: '12%', left: '78%', height: '5%', width: '5%'}, content: null},
-        {styleUpdate: true, style: {top: '12%', left: '84%', height: '5%', width: '5%', zIndex: '20', transition: 'default'}, content: null},
-        {styleUpdate: true, style: {top: '49%', left: '16%', height: '12%', width: '12%', opacity: '0'}, content: null}, //fade out
-        {styleUpdate: true, style: {top: '49%', left: '76%', height: '12%', width: '12%', opacity: '0', zIndex: '18'}, content: null}, //fade out
-        {style: {top: '79%', left: '16%', height: '12%', width: '12%', backgroundImage: 'url(./avatar/boy-18.svg)', opacity: '0', zIndex: '18'}, content: null}, // invisible add user
-        {style: {top: '79%', left: '46%', height: '12%', width: '12%', backgroundImage: 'url(./avatar/girl-3.svg)', opacity: '0', zIndex: '18'}, content: null}, // invisible add user
-        {style: {top: '79%', left: '76%', height: '12%', width: '12%', backgroundImage: 'url(./avatar/boy-12.svg)', opacity: '0', zIndex: '18'}, content: null}, // invisible add user
-        {style: {top: '40%', left: '10%', height: '10%', width: '80%', fontSize: 17, opacity: '0'}, content: 'realtime collaboration'}, // invisible new text
-      ]},
-      {name: 'show users', frames: 12, elements: [ // 26-37
-        true,
-        false,
-        true,
-        true,
-        false,
-        false,
-        {styleUpdate: true, style: {top: '60%', left: '27%', height: '10%', width: '10%', opacity: '1'}, content: null}, // invisible add user
-        {styleUpdate: true, style: {top: '60%', left: '47%', height: '10%', width: '10%', opacity: '1'}, content: null}, // invisible add user
-        {styleUpdate: true, style: {top: '60%', left: '67%', height: '10%', width: '10%', opacity: '1'}, content: null}, // invisible add user,
-        {styleUpdate: true, style: {opacity: '1'}}, // fade in
-      ]},
-      {name: 'speech bubbling', frames: 3, elements: [ // 38-39
-        true, false, true, true,
-        {style: {top: '50%', left: '61%', height: '10%', width: '10%', backgroundImage: 'url(./communication/speech-bubble.svg)'}, content: null},
-        false, true, true, true, true
-      ]},
-      {name: 'speech bubbling2', frames: 3, elements: [ // 40-41
-        true, false, true, true, true,
-        {style: {top: '50%', left: '35%', height: '10%', width: '10%', backgroundImage: 'url(./communication/speech-bubble.svg)', transform: 'scaleX(-1)'}, content: null},
-        true, true, true, true
-      ]},
-    ]}
-  />,
-  document.querySelector("#animationWindow")
-)
 
 const options = {
   lineNumbers: true,
@@ -95,16 +19,110 @@ const options = {
     json: true
   },
   readOnly: true,
-  theme: 'ambiance'
+  theme: 'neo'
 }
-console.log()
 
-let code = document.querySelector("#fakeTypingCode").innerHTML.split('\n')
-code.splice(0,1)
-code.splice(code.length - 2,1)
-code = code.join('\n')
+class App extends React.Component {
+  render () {
+    return (
+      <div>
+        <div className="sectionHeader">
+          <h1>camel<br />components</h1>
+          <p>standalone React / JSX components</p>
+          <div className="installation">
+            <span>npm install camel-components --save</span>
+          </div>
+          <div>
+            <a href="https://www.npmjs.com/package/camel-components">npm</a>
+            <a href="https://github.com/musemind/camel-components">Github</a>
+          </div>
+        </div>
+        <div style={{padding: '50px 40px'}}>
+          <h2>Component: "Fake Typing"</h2>
+          <p>Eyecatcher for important stuff, listings.<br />Example:</p>
+          <FakeTyping
+            timeAfterCharacter={50}
+            timeAfterWord={4000}
+            lines={[
+              'Lorem Ipsum is simply dummy text..',
+              'Sed ut perspiciatis unde omnis iste natus.',
+              '1914 translation by H. Rackham'
+            ]}
+          />
+        </div>
+
+        <div className="sectionCode">
+          <Codemirror className="fakeTypingCode" value={require("raw!./demo-assets/fakeTypingCode.txt")} onChange={() => {}} options={options} style={{height: '350px !important'}} />
+        </div>
+
+        <div style={{padding: '50px 40px'}}>
+          <h2>Component: "Animation Window"</h2>
+          <p>CSS3 Transition based animation window. You can create different scenes and animations inside this scenes.<br />Example:</p>
+          <AnimationWindow
+            frameSpeed={45} // in ms
+            frameStart={'toggle bubbles'} // scene name or frame number
+            animation={true} // false to freeze frame for easy scene creation
+            transitionSpeed={800} // default transition speed, overwritten by element styles
+            windowStyles={{position: 'relative', height: 400, width: 400, background: 'rgba(0.0.0.0)'}}
+            stopOnEnd={false} // optional: false (default) => endless set repetition, true => set will run once
+            scenes={[
+              {name: 'social login', frames: 10, elements: {
+                bar: {style: {top: '35%', left: '20%', height: '30%', width: '60%', background: 'rgba(255, 255, 255, 0.1)', border: 'rgba(255, 255, 255, 0.2) 1px solid'}},
+                wording: {style: {top: '40%', left: '10%', height: '10%', width: '80%', fontSize: 17}, content: 'social login'},
+                avatar: {style: {top: '19%', left: '44%', height: '12%', width: '12%', backgroundImage: 'url(./avatar/boy-1.svg)'}},
+                facebook: {style: {top: '51%', left: '46%', height: '8%', width: '8%', backgroundImage: 'url(./socialnetwork/facebook.svg)', zIndex: '20'}},
+                googlePlus: {style: {top: '51%', left: '36%', height: '8%', width: '8%', backgroundImage: 'url(./socialnetwork/google-plus.svg)'}},
+                twitter: {style: {top: '51%', left: '56%', height: '8%', width: '8%', backgroundImage: 'url(./socialnetwork/twitter.svg)'}},
+              }},
+              {name: 'facebook trigger', frames: 4, elements: {
+                facebook: {styleUpdate: true, style: {top: '47%', left: '42%', height: '16%', width: '16%', transition: 'all 400ms cubic-bezier(0.250, 1.085, 0.785, 1.650)'}},
+              }},
+              {name: 'logged in', frames: 12, elements: {
+                bar: {styleUpdate: true, style: {top: '10%', left: '10%', height: '10%', width: '80%'}},
+                wording: {styleUpdate: true, removeAfterScene: true, style: {opacity: '0'}}, //fade out
+                avatar: {styleUpdate: true, style: {top: '12%', left: '78%', height: '5%', width: '5%'}},
+                facebook: {styleUpdate: true, style: {top: '12%', left: '84%', height: '5%', width: '5%', zIndex: '20', transition: 'default'}},
+                googlePlus: {styleUpdate: true, removeAfterScene: true, style: {top: '49%', left: '16%', height: '12%', width: '12%', opacity: '0'}}, //fade out
+                twitter: {styleUpdate: true, removeAfterScene: true, style: {top: '49%', left: '76%', height: '12%', width: '12%', opacity: '0', zIndex: '18'}}, //fade out
+                user1: {style: {top: '79%', left: '16%', height: '12%', width: '12%', backgroundImage: 'url(./avatar/boy-18.svg)', opacity: '0', zIndex: '18'}}, // invisible add user
+                user2: {style: {top: '79%', left: '46%', height: '12%', width: '12%', backgroundImage: 'url(./avatar/girl-3.svg)', opacity: '0', zIndex: '18'}}, // invisible add user
+                user3: {style: {top: '79%', left: '76%', height: '12%', width: '12%', backgroundImage: 'url(./avatar/boy-12.svg)', opacity: '0', zIndex: '18'}}, // invisible add user
+                wording2: {style: {top: '40%', left: '10%', height: '10%', width: '80%', fontSize: 17, opacity: '0'}, content: 'realtime collaboration'}, // invisible new text
+              }},
+              {name: 'show users', frames: 12, elements: {
+                user1: {styleUpdate: true, style: {top: '60%', left: '27%', height: '10%', width: '10%', opacity: '1'}}, // invisible add user
+                user2: {styleUpdate: true, style: {top: '60%', left: '47%', height: '10%', width: '10%', opacity: '1'}}, // invisible add user
+                user3: {styleUpdate: true, style: {top: '60%', left: '67%', height: '10%', width: '10%', opacity: '1'}}, // invisible add user
+                wording2: {styleUpdate: true, style: {opacity: '1'}}, // fade in
+              }},
+              {name: 'speech bubbling', frames: 3, elements: {
+                speechBubble1: {style: {top: '50%', left: '61%', height: '10%', width: '10%', backgroundImage: 'url(./communication/speech-bubble.svg)'}},
+              }},
+              {name: 'speech bubbling2', frames: 3, elements: {
+                speechBubble2: {style: {top: '50%', left: '35%', height: '10%', width: '10%', backgroundImage: 'url(./communication/speech-bubble.svg)', transform: 'scaleX(-1)'}},
+              }},
+              {name: 'toggle bubbles', frames: 10, elements: {
+                speechBubble1: {styleUpdate: true, style: {left: '20%'}},
+                speechBubble2: {styleUpdate: true, style: {left: '74%'}},
+              }},
+            ]}
+          />
+        </div>
+
+        <div className="sectionCode">
+          <Codemirror className="animationWindowCode" value={require("raw!./demo-assets/animationWindowCode.txt")} onChange={() => {}} options={options} style={{height: '350px !important'}} />
+        </div>
+
+        <div className="sectionFooter">
+          "camel components" are free to use in any project. created by <a href="https://github.com/musemind">musemind</a>
+        </div>
+      </div>
+    )
+  }
+}
+
 
 ReactDOM.render(
-  <Codemirror value={code} onChange={() => {}} options={options} />,
-  document.querySelector("#fakeTypingCode")
+  <App />,
+  document.querySelector("#appRoot")
 )
