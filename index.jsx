@@ -25,7 +25,7 @@ class App extends React.Component {
   componentWillMount () {
     let page = window.location.hash
     if (page === '') {
-      page = '#home'
+      page = '#component-AnimationWindow'
     }
     this.setState({
       page
@@ -36,7 +36,7 @@ class App extends React.Component {
     const {page} = this.state
     const content = () => {
       switch (page) {
-        case '#component-TakeTyping':
+        case '#component-FakeTyping':
           return (
             <div>
               <div style={{padding: '50px 40px'}}>
@@ -134,7 +134,7 @@ class App extends React.Component {
       <div className="sectionCamelComponents">
         <div className="sectionNavigation">
           <div>
-            <h1 onClick={() => {setPage('#home')}}>camel<br />components</h1>
+            <h1 onClick={() => {setPage('#component-AnimationWindow')}}>camel<br />components</h1>
             <p>React animation components</p>
             <div className="installation">
               <span>npm install camel-components --save</span>
@@ -152,8 +152,8 @@ class App extends React.Component {
                 Animation Window
               </div>
               <div
-                className={`nagivation-item ${(this.state.page === '#component-TakeTyping') ? 'active' : ''}`}
-                onClick={() => {setPage('#component-TakeTyping')}}
+                className={`nagivation-item ${(this.state.page === '#component-FakeTyping') ? 'active' : ''}`}
+                onClick={() => {setPage('#component-FakeTyping')}}
               >
                 Fake Typing
               </div>
