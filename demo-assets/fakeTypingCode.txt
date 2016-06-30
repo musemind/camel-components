@@ -1,0 +1,18 @@
+import React from 'react'
+import { FakeTyping } from 'camel-components'
+
+class YourApp extends React.Component {
+  render () {
+    return (
+      <FakeTyping
+        timeAfterCharacter={50} // time in ms
+        timeAfterWord={4000} // time in ms
+        lines={[
+          'Lorem Ipsum is simply dummy text..',
+          'Sed ut perspiciatis unde omnis iste natus.',
+          '1914 translation by H. Rackham'
+      ]}
+      />
+    )
+  }
+}
