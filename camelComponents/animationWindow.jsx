@@ -2,7 +2,7 @@ import React from 'react'
 
 class AnimationWindow extends React.Component {
   componentWillMount() {
-    let {frameSpeed, frameStart, animation, scenes} = this.props
+    let {frameStart, scenes} = this.props
 
     let framesTotal = 0
     scenes.forEach((scene) => {
@@ -12,8 +12,6 @@ class AnimationWindow extends React.Component {
       framesTotal += scene.frames
     })
 
-    console.log('frames total', framesTotal)
-
     this.setState({
       frame: frameStart,
       framesTotal
@@ -22,28 +20,34 @@ class AnimationWindow extends React.Component {
 
   componentDidMount() {
     if (this.props.animation) {
-      setInterval(() => {
-        this.nextFrame()
-      }, 200)
+      this.setState({
+        timer: setInterval(() => {
+          this.nextFrame()
+        }, 200)
+      })
     }
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(nextState) {
     if (this.state.frame === nextState.frame) return false
     return true
   }
-
   nextFrame() {
-    const {frame, framesTotal} = this.state
-    this.setState({
-      frame: (frame < framesTotal) ? frame + 1 : 0
-    })
-    console.log(frame)
+    const {stopOnEnd} = this.props
+    const {frame, framesTotal, timer} = this.state
+    const newFrame = (frame < framesTotal - 1) ? frame + 1 : 0
+    if (stopOnEnd && (newFrame === 0)) {
+      clearInterval(timer)
+    } else {
+      this.setState({
+        frame: newFrame
+      })
+    }
   }
 
   render () {
     const {frame} = this.state
-    const {frameSpeed, frameStart, animation, scenes, transitionSpeed, windowStyles} = this.props
+    const {scenes, transitionSpeed, windowStyles} = this.props
 
     const getCurrentScene = (frame, scenes) => {
       let scene = 0
