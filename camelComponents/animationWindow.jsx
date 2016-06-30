@@ -1,8 +1,9 @@
 import React from 'react'
+import R from 'ramda'
 
 class AnimationWindow extends React.Component {
   componentWillMount() {
-    let {frameStart, scenes} = this.props
+    let {frameStart, scenes, transitionSpeed} = this.props
 
     let framesTotal = 0
     scenes.forEach((scene) => {
@@ -12,9 +13,22 @@ class AnimationWindow extends React.Component {
       framesTotal += scene.frames
     })
 
+    const defaultStyles = {
+      position: 'absolute',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundPosition: 'center center',
+      backgroundSize: 'contain',
+      backgroundRepeat: 'no-repeat',
+      opacity: 1,
+      transition: `left ${transitionSpeed}ms ease,top ${transitionSpeed}ms ease, height ${transitionSpeed}ms ease, width ${transitionSpeed}ms ease, border ${transitionSpeed}ms ease, border-color ${transitionSpeed}ms ease, background-color ${transitionSpeed}ms ease, background-position ${transitionSpeed}ms ease, opacity ${transitionSpeed}ms ease`
+    }
+
     this.setState({
       frame: frameStart,
-      framesTotal
+      framesTotal,
+      defaultStyles
     })
   }
 
@@ -46,8 +60,8 @@ class AnimationWindow extends React.Component {
   }
 
   render () {
-    const {frame} = this.state
-    const {scenes, transitionSpeed, windowStyles} = this.props
+    const {frame, defaultStyles} = this.state
+    const {scenes, windowStyles} = this.props
 
     const getCurrentScene = (frame, scenes) => {
       let scene = 0
@@ -62,44 +76,37 @@ class AnimationWindow extends React.Component {
     const currentScene = getCurrentScene(frame, scenes)
 
     const animationElement = (element, index) => {
-      const defaultStyles = {
-        position: 'absolute',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundPosition: 'center center',
-        backgroundSize: 'contain',
-        backgroundRepeat: 'no-repeat',
-        opacity: 1,
-        transition: `left ${transitionSpeed}ms ease,top ${transitionSpeed}ms ease, height ${transitionSpeed}ms ease, width ${transitionSpeed}ms ease, border ${transitionSpeed}ms ease, border-color ${transitionSpeed}ms ease, background-color ${transitionSpeed}ms ease, background-position ${transitionSpeed}ms ease, opacity ${transitionSpeed}ms ease`
-      }
       return (
         <div key={index} style={{...defaultStyles, ...element.style}}>{element.content}</div>
       )
     }
 
-    const sameElementOfPreviousScene = (scenes, currentScene, elementIndex) => {
-      let element = false
+    const aggregateElement = (scenes, currentScene, elementIndex) => {
+      let style = {}
       do {
-        currentScene--
-        element = scenes[currentScene].elements[elementIndex]
+        let element = R.clone(scenes[currentScene].elements[elementIndex])
         if (typeof element === 'object') {
-          return element
+          if (element.style.transition === 'default') {
+            element.style.transition = defaultStyles.transition
+          }
+          style = {...element.style, ...style}
+          if (!element.styleUpdate) {
+            element.style = style
+            return element
+          }
+        } else {
+          if (!element) {
+            return false
+          }
         }
+        currentScene--
       } while (currentScene >= 0)
       return false
     }
 
     const animationElements = () => {
       return scenes[currentScene].elements.map((element, index) => {
-        if (typeof element === 'object') {
-          return animationElement(element, index)
-        } else {
-          if (element) {
-            return animationElement(sameElementOfPreviousScene(scenes, currentScene, index), index)
-          }
-          return false
-        }
+        return animationElement(aggregateElement(scenes, currentScene, index), index)
       })
     }
 
