@@ -12,24 +12,38 @@ body {
     flex-direction: column;
     margin: 0;
     padding: 0;
-
-    .container {
-        width: 800px;
-        margin: 0 auto;
+    position: absolute;
+    min-height: 100%;
+    min-width: 100%;
+    #appRoot {
+        display: flex;
+        flex: 1;
     }
-    .sectionHeader {
+
+    .sectionCamelComponents {
+        display: flex;
+        flex: 1;
+    }
+    .sectionNavigation {
+        width: 254px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         background: #fff;
-        color: #fff;
+        display: flex;
+        color: #bbb;
         padding-bottom: 40px;
-        display: block;
         padding: 30px 20px;
+        font-size: 12px;
+        border-right: 2px solid @blue;
         h1 {
             font-family: 'Indie Flower', cursive;
-            font-size: 60px;
+            font-size: 50px;
             margin-bottom: 0px;
             color: @blue;
             margin-top: 0px;
             line-height: 34px;
+            cursor: pointer;
         }
         p {
             font-weight: 100;
@@ -41,6 +55,20 @@ body {
             text-decoration: none;
             margin-right: 30px;
         }
+        .nagivation-item {
+            color: @blue;
+            background: #e1e9f3;
+            padding: 10px 20px;
+            margin-top: 3px;
+            font-size: 15px;
+            cursor: pointer;
+            &:hover {
+                background: #d0e6f3;
+            }
+            &.active {
+                background: #d0e6f3;
+            }
+        }
         .installation {
             span {
                 font-family: monospace;
@@ -49,9 +77,12 @@ body {
                 color: @orange;
                 border-radius: 5px;
                 margin: 10px 0;
-                font-size: 16px;
+                font-size: 11px;
             }
         }
+    }
+    .sectionContent {
+        flex: 1;
     }
 }
 
@@ -130,18 +161,4 @@ p {
 }
 .animationWindowCode .CodeMirror {
     height: 1080px !important;
-}
-
-.sectionFooter {
-    padding: 20px 0;
-    color: #fff;
-    font-weight: 300;
-    background: @blue;
-    padding-left: 40px;
-
-    a, a:hover, a:visited {
-        color: #bbb;
-        text-decoration: none;
-        font-weight: 400;
-    }
 }

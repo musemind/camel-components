@@ -11,7 +11,6 @@ import Codemirror from 'react-codemirror'
 import { FakeTyping } from './camelComponents/fakeTyping.jsx'
 import { AnimationWindow } from './camelComponents/animationWindow.jsx'
 
-
 const options = {
   lineNumbers: true,
   mode: {
@@ -23,49 +22,56 @@ const options = {
 }
 
 class App extends React.Component {
+  componentWillMount () {
+    let page = window.location.hash
+    if (page === '') {
+      page = '#home'
+    }
+    this.setState({
+      page
+    })
+  }
+
   render () {
-    return (
-      <div>
-        <div className="sectionHeader">
-          <h1>camel<br />components</h1>
-          <p>standalone React / JSX components</p>
-          <div className="installation">
-            <span>npm install camel-components --save</span>
-          </div>
-          <div>
-            <a href="https://www.npmjs.com/package/camel-components">npm</a>
-            <a href="https://github.com/musemind/camel-components">Github</a>
-          </div>
-        </div>
-        <div style={{padding: '50px 40px'}}>
-          <h2>Component: "Fake Typing"</h2>
-          <p>Eyecatcher for important stuff, listings.<br />Example:</p>
-          <FakeTyping
-            timeAfterCharacter={50}
-            timeAfterWord={4000}
-            lines={[
+    const {page} = this.state
+    const content = () => {
+      switch (page) {
+        case '#component-TakeTyping':
+          return (
+            <div>
+              <div style={{padding: '50px 40px'}}>
+                <h2>Component: "Fake Typing"</h2>
+                <p>Eyecatcher for important stuff, listings.<br />Example:</p>
+                <FakeTyping
+                  timeAfterCharacter={50}
+                  timeAfterWord={4000}
+                  lines={[
               'Lorem Ipsum is simply dummy text..',
               'Sed ut perspiciatis unde omnis iste natus.',
               '1914 translation by H. Rackham'
             ]}
-          />
-        </div>
+                />
+              </div>
 
-        <div className="sectionCode">
-          <Codemirror className="fakeTypingCode" value={require("raw!./demo-assets/fakeTypingCode.txt")} onChange={() => {}} options={options} style={{height: '350px !important'}} />
-        </div>
-
-        <div style={{padding: '50px 40px'}}>
-          <h2>Component: "Animation Window"</h2>
-          <p>CSS3 Transition based animation window. You can create different scenes and animations inside this scenes.<br />Example:</p>
-          <AnimationWindow
-            frameSpeed={45} // in ms
-            frameStart={'toggle bubbles'} // scene name or frame number
-            animation={true} // false to freeze frame for easy scene creation
-            transitionSpeed={800} // default transition speed, overwritten by element styles
-            windowStyles={{position: 'relative', height: 400, width: 400, background: 'rgba(0.0.0.0)'}}
-            stopOnEnd={false} // optional: false (default) => endless set repetition, true => set will run once
-            scenes={[
+              <div className="sectionCode">
+                <Codemirror className="fakeTypingCode" value={require("raw!./demo-assets/fakeTypingCode.txt")} onChange={() => {}} options={options} style={{height: '350px !important'}} />
+              </div>
+            </div>
+          )
+        case '#component-AnimationWindow':
+          return (
+            <div>
+              <div style={{padding: '50px 40px'}}>
+                <h2>Component: "Animation Window"</h2>
+                <p>CSS3 Transition based animation window. You can create different scenes and animations inside this scenes.<br />Example:</p>
+                <AnimationWindow
+                  frameSpeed={45} // in ms
+                  frameStart={'toggle bubbles'} // scene name or frame number
+                  animation={true} // false to freeze frame for easy scene creation
+                  transitionSpeed={800} // default transition speed, overwritten by element styles
+                  windowStyles={{position: 'relative', height: 400, width: 400, background: 'rgba(0.0.0.0)'}}
+                  stopOnEnd={false} // optional: false (default) => endless set repetition, true => set will run once
+                  scenes={[
               {name: 'social login', frames: 10, elements: {
                 bar: {style: {top: '35%', left: '20%', height: '30%', width: '60%', background: 'rgba(255, 255, 255, 0.1)', border: 'rgba(255, 255, 255, 0.2) 1px solid'}},
                 wording: {style: {top: '40%', left: '10%', height: '10%', width: '80%', fontSize: 17}, content: 'social login'},
@@ -106,18 +112,64 @@ class App extends React.Component {
                 speechBubble2: {styleUpdate: true, style: {left: '74%'}},
               }},
             ]}
-          />
-        </div>
+                />
+              </div>
 
-        <div className="sectionCode">
-          <Codemirror className="animationWindowCode" value={require("raw!./demo-assets/animationWindowCode.txt")} onChange={() => {}} options={options} style={{height: '350px !important'}} />
-        </div>
+              <div className="sectionCode">
+                <Codemirror className="animationWindowCode" value={require("raw!./demo-assets/animationWindowCode.txt")} onChange={() => {}} options={options} style={{height: '350px !important'}} />
+              </div>
+            </div>
+          )
+      }
+      return (
+        <span>Hallo</span>
+      )
+    }
+    const setPage = (page) => {
+      history.pushState(null, null, page);
+      this.setState({page})
+    }
 
-        <div className="sectionFooter">
-          "camel components" are free to use in any project. created by <a href="https://github.com/musemind">musemind</a>
+    return (
+      <div className="sectionCamelComponents">
+        <div className="sectionNavigation">
+          <div>
+            <h1 onClick={() => {setPage('#home')}}>camel<br />components</h1>
+            <p>React animation components</p>
+            <div className="installation">
+              <span>npm install camel-components --save</span>
+            </div>
+            <div>
+              <a href="https://www.npmjs.com/package/camel-components">npm</a>
+              <a href="https://github.com/musemind/camel-components">Github</a>
+            </div>
+            <div style={{marginTop: 40}}>
+              Components:
+              <div
+                className={`nagivation-item ${(this.state.page === '#component-AnimationWindow') ? 'active' : ''}`}
+                onClick={() => {setPage('#component-AnimationWindow')}}
+              >
+                Animation Window
+              </div>
+              <div
+                className={`nagivation-item ${(this.state.page === '#component-TakeTyping') ? 'active' : ''}`}
+                onClick={() => {setPage('#component-TakeTyping')}}
+              >
+                Fake Typing
+              </div>
+            </div>
+
+          </div>
+          <div style={{paddingTop: 30}}>
+            "camel components" are free to use in any project. created by <a href="https://github.com/musemind">musemind</a>
+          </div>
+        </div>
+        <div className="sectionContent">
+          {content()}
         </div>
       </div>
     )
+
   }
 }
 
