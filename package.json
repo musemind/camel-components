@@ -1,7 +1,7 @@
 {
   "name": "camel-components",
   "version": "0.1.0",
-  "description": "Camel Components",
+  "description": "Scene and Animation Components for React",
   "main": "./delivery/index.js",
   "scripts": {
     "build": "NODE_ENV=production webpack -p --config webpack.production.config.js --progress --profile --colors",

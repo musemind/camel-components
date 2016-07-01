@@ -1,7 +1,6 @@
 # camel-components
-Standalone React Components
 
-Simple [React](https://facebook.github.io/react/) components without additional dependencies.
+[React](https://facebook.github.io/react/) animation components with minimal additional dependencies.
 
 ### Example page
 [https://musemind.github.io/camel-components/](https://musemind.github.io/camel-components/)
