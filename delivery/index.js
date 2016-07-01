@@ -160,10 +160,14 @@ var AnimationWindow = function (_React$Component) {
             if (element.removeAfterScene && searchScene !== currentScene) {
               return false;
             }
-            if (element.style.transition === 'default') {
-              element.style.transition = defaultStyles.transition;
+            if (element.styleUpdate) {
+              style = _extends({}, element.styleUpdate, style);
+            } else {
+              style = _extends({}, element.style, style);
             }
-            style = _extends({}, element.style, style);
+            if (style.transition === 'default') {
+              style.transition = defaultStyles.transition;
+            }
             if (!element.styleUpdate) {
               element.style = style;
               return element;
