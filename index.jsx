@@ -81,25 +81,25 @@ class App extends React.Component {
                 twitter: {style: {top: '51%', left: '56%', height: '8%', width: '8%', backgroundImage: 'url(./socialnetwork/twitter.svg)'}},
               }},
               {name: 'facebook trigger', frames: 4, elements: {
-                facebook: {styleUpdate: true, style: {top: '47%', left: '42%', height: '16%', width: '16%', transition: 'all 400ms cubic-bezier(0.250, 1.085, 0.785, 1.650)'}},
+                facebook: {styleUpdate: {top: '47%', left: '42%', height: '16%', width: '16%', transition: 'all 400ms cubic-bezier(0.250, 1.085, 0.785, 1.650)'}},
               }},
               {name: 'logged in', frames: 12, elements: {
-                bar: {styleUpdate: true, style: {top: '10%', left: '10%', height: '10%', width: '80%'}},
-                wording: {styleUpdate: true, removeAfterScene: true, style: {opacity: '0'}}, //fade out
-                avatar: {styleUpdate: true, style: {top: '12%', left: '78%', height: '5%', width: '5%'}},
-                facebook: {styleUpdate: true, style: {top: '12%', left: '84%', height: '5%', width: '5%', zIndex: '20', transition: 'default'}},
-                googlePlus: {styleUpdate: true, removeAfterScene: true, style: {top: '49%', left: '16%', height: '12%', width: '12%', opacity: '0'}}, //fade out
-                twitter: {styleUpdate: true, removeAfterScene: true, style: {top: '49%', left: '76%', height: '12%', width: '12%', opacity: '0', zIndex: '18'}}, //fade out
+                bar: {styleUpdate: {top: '10%', left: '10%', height: '10%', width: '80%'}},
+                wording: {removeAfterScene: true, styleUpdate: {opacity: '0'}}, //fade out
+                avatar: {styleUpdate: {top: '12%', left: '78%', height: '5%', width: '5%'}},
+                facebook: {styleUpdate: {top: '12%', left: '84%', height: '5%', width: '5%', zIndex: '20', transition: 'default'}},
+                googlePlus: {removeAfterScene: true, styleUpdate: {top: '49%', left: '16%', height: '12%', width: '12%', opacity: '0'}}, //fade out
+                twitter: {removeAfterScene: true, styleUpdate: {top: '49%', left: '76%', height: '12%', width: '12%', opacity: '0', zIndex: '18'}}, //fade out
                 user1: {style: {top: '79%', left: '16%', height: '12%', width: '12%', backgroundImage: 'url(./avatar/boy-18.svg)', opacity: '0', zIndex: '18'}}, // invisible add user
                 user2: {style: {top: '79%', left: '46%', height: '12%', width: '12%', backgroundImage: 'url(./avatar/girl-3.svg)', opacity: '0', zIndex: '18'}}, // invisible add user
                 user3: {style: {top: '79%', left: '76%', height: '12%', width: '12%', backgroundImage: 'url(./avatar/boy-12.svg)', opacity: '0', zIndex: '18'}}, // invisible add user
                 wording2: {style: {top: '40%', left: '10%', height: '10%', width: '80%', fontSize: 17, opacity: '0'}, content: 'realtime collaboration'}, // invisible new text
               }},
               {name: 'show users', frames: 12, elements: {
-                user1: {styleUpdate: true, style: {top: '60%', left: '27%', height: '10%', width: '10%', opacity: '1'}}, // invisible add user
-                user2: {styleUpdate: true, style: {top: '60%', left: '47%', height: '10%', width: '10%', opacity: '1'}}, // invisible add user
-                user3: {styleUpdate: true, style: {top: '60%', left: '67%', height: '10%', width: '10%', opacity: '1'}}, // invisible add user
-                wording2: {styleUpdate: true, style: {opacity: '1'}}, // fade in
+                user1: {styleUpdate: {top: '60%', left: '27%', height: '10%', width: '10%', opacity: '1'}}, // invisible add user
+                user2: {styleUpdate: {top: '60%', left: '47%', height: '10%', width: '10%', opacity: '1'}}, // invisible add user
+                user3: {styleUpdate: {top: '60%', left: '67%', height: '10%', width: '10%', opacity: '1'}}, // invisible add user
+                wording2: {styleUpdate: {opacity: '1'}}, // fade in
               }},
               {name: 'speech bubbling', frames: 3, elements: {
                 speechBubble1: {style: {top: '50%', left: '61%', height: '10%', width: '10%', backgroundImage: 'url(./communication/speech-bubble.svg)'}},
@@ -108,8 +108,8 @@ class App extends React.Component {
                 speechBubble2: {style: {top: '50%', left: '35%', height: '10%', width: '10%', backgroundImage: 'url(./communication/speech-bubble.svg)', transform: 'scaleX(-1)'}},
               }},
               {name: 'toggle bubbles', frames: 10, elements: {
-                speechBubble1: {styleUpdate: true, style: {left: '20%'}},
-                speechBubble2: {styleUpdate: true, style: {left: '74%'}},
+                speechBubble1: {styleUpdate: {left: '20%'}},
+                speechBubble2: {styleUpdate: {left: '74%'}},
               }},
             ]}
                 />
